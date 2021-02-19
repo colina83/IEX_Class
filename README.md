@@ -2,7 +2,7 @@
 # OOP,Pandas, Numpy
 
 
-Simple Python Class to generate a backtesting trading strategy using 2 SMA's leveraging an existing python library, and in specific  one method
+Simple Python Class to generate a backtesting trading strategy using 2 SMA's, leveraging an existing python library to get data from IEX cloud platform, and in specific  one method
 ```bash
 $ from iexfinance.stocks import get_historical_data
 ```
