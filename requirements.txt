@@ -1,0 +1,6 @@
+pandas
+matplotlib
+time
+iexfinance
+numpy
+pylab
