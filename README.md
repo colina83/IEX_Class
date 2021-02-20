@@ -1,3 +1,24 @@
+# Classy-IEX  Day 4
+# OOP,Pandas, Numpy
+
+Small refactoring for main, I simply added a menu so the user can select to plot the SMA backtesting startegy 
+or just to simply save the file to disk.
+
+I have added 2  plots to the backtesting test:
+ - Frequency Distribution of the selected security log returns - Histogram
+ - Gross Performance of your security compared to the SMA strategy, you can estimate if the strategy: 
+	go long when the shorter SMA (42 days) is above the longer SAM(252 days), and go short then then shorter SMA 42 days)
+   is below the longer SMA (252 days)
+
+Obviously, you want to run a lot of examples and perhaps verify the strategy with your own portfolio,
+before applying this strategy on recent market movement
+
+Please follow the instructions below to run the script:
+```python
+python main.py
+```
+
+#-----------------------------------------------------------------------------
 # Classy-IEX  Day 2
 # OOP,Pandas, Numpy
 
@@ -36,7 +57,7 @@ $ pip3 install -r requirements.txt
 
 ## Usage
 
-1. Ensure you have your API ready , it looks something like this : pk_46ad823316a34d53a904fbbd63d67f28
+1. Ensure you have your API ready (GET YOUR KEY ---> https://www.iexcloud.io) , it looks something like this : pk_46ad823316a34d53a904fbbd63d67f28
 	  Just so it is clear, the key above doesn't work, is just an example
 
 2. Please note that you don't have to edit the `IEXclass.py`, actually, you don't have to modify any file, everything is automated

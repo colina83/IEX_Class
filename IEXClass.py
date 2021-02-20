@@ -42,14 +42,27 @@ class IEXfin:
         mpl.rcParams['font.family'] = 'serif'
         data_plot.plot(title = f"{self.ticker} - 42 & 252 days SMA's", figsize = (10,6))
         plt.show()
-        #Market Strategy
+        #Market position
         data_plot['position'] = np.where(data_plot['SMA1'] > data_plot['SMA2'], 1, -1)
         data_plot.dropna(inplace=True)
         data_plot['position'].plot(ylim=[-1.1,1.1], title = f'{self.ticker} position -Long and Short', figsize = (10,6))
+        plt.show()
+        ## Calculates the performance of the strategy, with a histogram, performance of the strategy relative to
+        ## the base investment
+        data_plot['returns'] = np.log(data_plot['price']/data_plot['price'].shift(1))
+        data_plot['returns'].hist(bins = 35,figsize=(10,6))
+        plt.show()
+        ## Calculate the returns for the strategy
+        data_plot['strategy'] = data_plot["position"].shift(1) * data_plot['returns']
+        data_plot[['returns','strategy']].sum()
+        data_plot[['returns', 'strategy']].sum()
+        data_plot[['returns','strategy']].sum().apply(np.exp)
+        data_plot[['returns','strategy']].cumsum().apply(np.exp).plot(figsize = (10,6))
         plt.show()
 
     def save_to_HDF5(self):
         h5 = pd.HDFStore('data/{}_{}.h5'.format(self.ticker,int(time.time())),'w')
         h5['df'] = self.historical_data()
         h5.close()
+        print(f"Your File is saved, please go to the data folder")
 

@@ -66,13 +66,49 @@ def user_input_date():
 
     return date_value
 
+def menu():
+    print("\n### Options Menu for Backtesting SMA Strategy ####")
+    print("1.- Would you like to Plot the Backtesting strategy for 2 SMA's (42 & 252), 4 plots will be displayed?")
+    print("2.- Would you like to save your file to a HDF5 file?\n")
+
+
+    while True:
+        try:
+            menu_option = int(input("Please enter a number as per the menu above:  "))
+            if menu_option > 0 and menu_option < 3:
+                    break
+            if menu_option.isalpha():
+                print("please enter a number")
+
+        except:
+            print("please enter a number")
+
+    return menu_option
+
+
+def user_info(api_key ,ticker,date_value, menu_option):
+
+    class_list = [attribute for attribute in dir(IEX.IEXfin(api_key,date_value,ticker)) if callable(getattr(IEX.IEXfin(api_key,date_value,ticker),attribute)) and attribute.startswith('__') is False]
+
+
+    option_dict = {}
+    count = 0
+    for classes in class_list:
+        option_dict[count] = classes
+        count += 1
+
+    init_method = IEX.IEXfin(api_key,date_value,ticker)
+    methods = getattr(init_method, option_dict.get(menu_option))
+    return methods()
+
+
 if __name__ == "__main__":
+
     api_key = key()
     ticker = ticker()
     date_value = user_input_date()
-    a = IEX.IEXfin(api_key,date_value,ticker)
-    a.plot_rolling_average()
-    a.save_to_HDF5()
+    menu_option = menu()
+    user_info(api_key ,ticker,date_value,menu_option)
 
 
 
